@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.buaa.AppServer.mapper.AircraftMapper">
+
+    <!--    alias   -->
+    <resultMap id="aircraft" type="com.buaa.AppServer.entity.Aircraft"/>
+    <parameterMap id="aircraft" type="com.buaa.AppServer.entity.Aircraft"/>
+
+
+    <!--    get all aircrafts    -->
+    <select id="getAll" resultMap="aircraft">
+        SELECT * from aircraft
+    </select>
+
+    <!--    get aircrafts by user_id    -->
+    <select id="findByUserId" resultMap="aircraft">
+        SELECT * from aircraft WHERE user_id = #{1}
+    </select>
+
+    <!--    get the aircraft by aircraft_id    -->
+    <select id="findById" resultMap="aircraft">
+        SELECT * from aircraft WHERE aircraft_id = #{1}
+    </select>
+
+    <!--    add a aircraft  -->
+    <insert id="add" parameterMap="aircraft">
+        INSERT INTO aircraft
+            (aircraft_id, user_id, model, number, address, devices)
+                VALUES (#{aircraftId}, #{userId}, #{model}, #{number}, #{address}, #{devices})
+    </insert>
+
+    <!--    delete a aircraft by aircraft_id    -->
+    <delete id="delete">
+        DELETE FROM aircraft WHERE aircraft_id=#{1}
+    </delete>
+
+    <!--    update a aircraft   -->
+    <update id="update" parameterMap="aircraft">
+        UPDATE aircraft
+            SET user_id = #{userId},
+            model = #{model},
+            number = #{number},
+            address = #{address},
+            devices = #{devices}
+                WHERE aircraft_id = #{aircraftId}
+    </update>
+
+</mapper>
